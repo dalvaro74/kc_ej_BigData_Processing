@@ -1,0 +1,4 @@
+[debug] "not up to date. inChanged = true, force = false
+[debug] Updating ProjectRef(uri("file:/Users/dynam1co/Proyectos_software/KC_Practica_BigData_Processing/"), "kc_practica_bigdata_processing")...
+[debug] Done updating ProjectRef(uri("file:/Users/dynam1co/Proyectos_software/KC_Practica_BigData_Processing/"), "kc_practica_bigdata_processing")
+[warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
