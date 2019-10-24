@@ -11,11 +11,11 @@ Hemos sido contratados para crear un algoritmo que ayude a este gobierno. Dejamo
 
 De vosotros, como desarrolladores Big Data, se requiere... 
 
-1.- Crear el esquema de cada uno de los datasets (ver orientación)
-2.- Rellenarlos con info dummy según esquema
-3.- Con el fin de procesar en tiempo real toda la información, tendréis que conseguir elaborar una única fuente de información ‘completa’ con la que trabajar, por lo previamente habréis tenido que preparar la info, quitar duplicados (si los hubiere), agrupar, ordenar, etc y todo aquello que creáis necesario para el correcto y posterior proceso.
+1. Crear el esquema de cada uno de los datasets (ver orientación)
+2. Rellenarlos con info dummy según esquema
+3. Con el fin de procesar en tiempo real toda la información, tendréis que conseguir elaborar una única fuente de información ‘completa’ con la que trabajar, por lo previamente habréis tenido que preparar la info, quitar duplicados (si los hubiere), agrupar, ordenar, etc y todo aquello que creáis necesario para el correcto y posterior proceso.
 
- **El fin último es hallar por hora** (ventana temporal) **las 10 palabras más usadas en los mensajes de tal ventana**. Una vez realizado este proceso, en caso de que la palabra más repetida coincida con alguna de las palabras de la lista negra, el sistema (nuestra aplicación) deberá enviar una notificación al ministro avisando de tal situación. 
+**El fin último es hallar por hora** (ventana temporal) **las 10 palabras más usadas en los mensajes de tal ventana**. Una vez realizado este proceso, en caso de que la palabra más repetida coincida con alguna de las palabras de la lista negra, el sistema (nuestra aplicación) deberá enviar una notificación al ministro avisando de tal situación. 
 
 Partimos de la base de que... 
 
