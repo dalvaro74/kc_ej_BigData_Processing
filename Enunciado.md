@@ -17,8 +17,6 @@ De vosotros, como desarrolladores Big Data, se requiere...
 
  **El fin último es hallar por hora** (ventana temporal) **las 10 palabras más usadas en los mensajes de tal ventana**. Una vez realizado este proceso, en caso de que la palabra más repetida coincida con alguna de las palabras de la lista negra, el sistema (nuestra aplicación) deberá enviar una notificación al ministro avisando de tal situación. 
 
-![page2image62096896.png](/Users/dynam1co/Library/Application Support/typora-user-images/page2image62096896.png)
-
 Partimos de la base de que... 
 
 - El sistema funciona 24/7 
@@ -32,8 +30,6 @@ Partimos de la base de que...
 - La palabra repetida no podrá ser una preposición ni conjunción ni artículo. 
 - Para simular el envío de datos por parte de los IOT’s, enchufaremos ficheros de 
    texto para que los procese Kafka. 
-
-![page2image62096896.png](/Users/dynam1co/Library/Application Support/typora-user-images/page2image62096896.png)
 
 Fuentes de datos y esquemas propuestos (orientativo):
 
@@ -62,8 +58,6 @@ Fuentes de datos y esquemas propuestos (orientativo):
 * Palabra (String)
 
 <small>**(*) No es bigdata, volumen pequeño**</small>
-
-![page2image62096896.png](/Users/dynam1co/Library/Application Support/typora-user-images/page2image62096896.png)
 
 Parte opcional 
 
