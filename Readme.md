@@ -36,6 +36,62 @@ También dentro de la carpeta **Resources** se encuentran los ficheros con los m
 
 Al ejecutarse la aplicación, se mostrará el siguiente menú en consola......
 
+## Obtención de mensajes 🖥️
+
+Para la obtención de los mensajes, he creado un proyecto en Scala que descarga Tweets en streaming y los almacena en un fichero de texto. Las librerías usadas han sido:
+
+- Spark Streaming
+- Spark Streaming Twitter
+- twitter4j
+
+Este es el código usado para tal fin:
+
+```scala
+import org.apache.spark.streaming.dstream.DStream
+import org.apache.spark.streaming.twitter.TwitterUtils
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.apache.spark.{SparkConf, SparkContext}
+import twitter4j.Status
+
+object pruebasFran extends App {
+    // En este fichero estan las funciones que se usan para clasificar tweets etc
+    import Utils._
+
+    // Configurar spark, nombre e indicamos que usamos todos los cores disponibles
+    val sparkConfiguration = new SparkConf()
+            .setAppName("Clasificar Tweets")
+            .setMaster("local[*]")
+
+    // Crearmos el contexto con la configuracion anterior
+    val sparkContext = new SparkContext(sparkConfiguration)
+
+    // Configuramos el streaming cada 5 segundos
+    val streamingContext = new StreamingContext(sparkContext, Seconds(5))
+
+    // Crear el stream de Twitter (mirar README para saber cómo configurar las credenciales)
+    var tweets: DStream[Status] = TwitterUtils.createStream(streamingContext, None)
+
+    tweets = tweets.filter(_.getLang == "es")  // Filtramos tweets en espanol
+    tweets = tweets.filter(tweetText => !(tweetText.getText contains "@"))  // Quitamos las menciones
+
+    // Guardar en ficheros de texto
+    tweets.map(tweetText => tweetText.getText).saveAsTextFiles("prueba.txt")
+
+    // Mostrar por consola
+    //tweets.map(tweetText => tweetText.getText).print()
+    
+    // Lanzamos el setreaming
+    streamingContext.start()
+
+    // Esperamos hasta que alguien lo pare
+    streamingContext.awaitTermination()
+}
+```
+
+## Aclaraciones ✏️
+
+Al esquema de los mensajes he decidido incluir un nuevo campo correspondiente al ID del dispositivo IoT.
+
 ## Expresiones de Gratitud 🎁
 
 * Comenta a otros sobre este proyecto 📢
