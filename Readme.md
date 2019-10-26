@@ -35,10 +35,21 @@ También dentro de la carpeta **Resources** se encuentran los csv con la informa
 - mensajes.csv con los mensajes capturados por los diferentes dispositivos IoT.
 - dispositivos.csv con la información de los diferentes dispositivos
 - usuarios.csv con todos los usuarios de Celebram
+- palabras_excluir.dat este fichero contiene palabaras que no se tienen en cuenta para el estudio (conjunciones, artículos y preposiciones)
 
 ## Deployment 📦
 
-Al ejecutarse la aplicación, se mostrará el siguiente menú en consola......
+Al ejecutarse la aplicación (fichero Main.scala), se cargará los csv de Usuarios y dispositivos IoT que estarán guardados en los csv correspondientes en la carpeta **Resources**.
+
+Después se iniciará la espera de mensajes desde Kafka, en este paso tendremos que ir a la consola de Kafka y ejecutar el siguiente comando para cargar el csv con los mensajes:
+
+```bash
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test < ../../Proyectos_software/KC_Practica_BigData_Processing/src/main/resources/mensajes.csv
+```
+
+Cuando acabe la ventana (para las pruebas se ha establecido en 10 segundos) se mostrará el resultado con las 10 palabras más usadas, también se comprobará si la palabra más repetida coincide con alguna de las plabras de la lista negra, en ese caso, se mostrará notificación al usuario de la siguiente forma:
+
+imagen notificación
 
 ## Obtención de mensajes 🖥️
 
@@ -97,6 +108,8 @@ object pruebasFran extends App {
 Al esquema de los mensajes he decidido incluir un nuevo campo correspondiente al ID del dispositivo IoT.
 
 Al esquema de usuarios le he cambiado el tipo de dato a Int porque me parece más óptimo a nivel de BBDD.
+
+A la hora de tratar los mensajes, se usa una función para desencriptarlos y no se tienen en cuenta las preposiciones, conjunciones ni artículos.
 
 ## Expresiones de Gratitud 🎁
 
