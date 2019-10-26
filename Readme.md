@@ -30,7 +30,11 @@ Se ha usado **sbt** como gestor de dependencias. Dentro del archivo build.sbt se
 
 Dentro de la carpeta **Resources** se encuentra el fichero lista_negra.dat que contiene las palabras consideradas como "negativas".
 
-También dentro de la carpeta **Resources** se encuentran los ficheros con los mensajes capturados por los diferentes dispositivos IoT.
+También dentro de la carpeta **Resources** se encuentran los csv con la información de dispositivos, mensajes y usuarios. Los Ficheros son los siguientes: 
+
+- mensajes.csv con los mensajes capturados por los diferentes dispositivos IoT.
+- dispositivos.csv con la información de los diferentes dispositivos
+- usuarios.csv con todos los usuarios de Celebram
 
 ## Deployment 📦
 
@@ -38,7 +42,7 @@ Al ejecutarse la aplicación, se mostrará el siguiente menú en consola......
 
 ## Obtención de mensajes 🖥️
 
-Para la obtención de los mensajes, he creado un proyecto en Scala que descarga Tweets en streaming y los almacena en un fichero de texto. Las librerías usadas han sido:
+Para la obtención de los mensajes, he creado un proyecto a parte en Scala que descarga Tweets en streaming y los almacena en un fichero de texto. Las librerías usadas han sido:
 
 - Spark Streaming
 - Spark Streaming Twitter
@@ -91,6 +95,8 @@ object pruebasFran extends App {
 ## Aclaraciones ✏️
 
 Al esquema de los mensajes he decidido incluir un nuevo campo correspondiente al ID del dispositivo IoT.
+
+Al esquema de usuarios le he cambiado el tipo de dato a Int porque me parece más óptimo a nivel de BBDD.
 
 ## Expresiones de Gratitud 🎁
 
