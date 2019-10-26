@@ -32,10 +32,10 @@ Dentro de la carpeta **Resources** se encuentra el fichero lista_negra.dat que c
 
 También dentro de la carpeta **Resources** se encuentran los csv con la información de dispositivos, mensajes y usuarios. Los Ficheros son los siguientes: 
 
-- mensajes.csv con los mensajes capturados por los diferentes dispositivos IoT.
-- dispositivos.csv con la información de los diferentes dispositivos
-- usuarios.csv con todos los usuarios de Celebram
-- palabras_excluir.dat este fichero contiene palabaras que no se tienen en cuenta para el estudio (conjunciones, artículos y preposiciones)
+- **mensajes.csv** con los mensajes capturados por los diferentes dispositivos IoT.
+- **dispositivos.csv** con la información de los diferentes dispositivos
+- **usuarios.csv** con todos los usuarios de Celebram
+- **palabras_excluir.dat** este fichero contiene palabaras que no se tienen en cuenta para el estudio (conjunciones, artículos y preposiciones)
 
 ## Deployment 📦
 
