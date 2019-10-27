@@ -49,9 +49,7 @@ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test < ../../
 
 El sistema leerá el fichero de palabras excluídas (artículos, preposiciones,.. ect) y no tendrá en cuenta dichas palabras para el análisis de los resultados.
 
-Cuando acabe la ventana (para las pruebas se ha establecido en 10 segundos) se mostrará el resultado con las 10 palabras más usadas, también se comprobará si la palabra más repetida coincide con alguna de las plabras de la lista negra, en ese caso, se mostrará notificación al usuario de la siguiente forma:
-
-imagen notificación
+Cuando acabe la ventana (para las pruebas se ha establecido en 10 segundos) se mostrará el resultado con las 10 palabras más usadas, también se comprobará si la palabra más repetida coincide con alguna de las plabras de la lista negra, en ese caso, se mostrará un aviso por consola.
 
 ## Obtención de mensajes 🖥️
 
