@@ -1,6 +1,7 @@
 package IOT_Sniffer
 
 import org.apache.log4j.{Level, Logger}
+import org.apache.spark.sql.execution.streaming.FileStreamSource.Timestamp
 import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession, functions}
 import org.apache.spark.sql.streaming.Trigger
 import scala.io.{AnsiColor, Source}
@@ -69,9 +70,22 @@ object Main {
                 .groupBy("value")  // Agrupo por la única columna
                 .count()  // Muestro el contador de cada palabra
 
-        // Ordenamos y nos quedamos con las 10 primeras
+        // Ordenamos por contador de apariciones de forma descendente NO HE SIDO CAPAZ DE OBTENER EL TOP 10
         val palabrasOrdenadas = conteoPalabras
                 .orderBy($"count".desc)
+
+        // Comprobar con lista negra
+        val palabrasListaNegra = spark.sparkContext.broadcast(load("/lista_negra.dat"))
+
+        val resultadoListaNegra = palabrasOrdenadas
+                .select($"value")
+                .as[String]
+                .filter(palabra => palabrasListaNegra.value.contains(palabra.toLowerCase))
+
+        // EL COUNT DA ERROR
+        /*if (resultadoListaNegra.count() > 0) {
+            println("ATENCIÓN: Se están usando palabras de la lista negra")
+        }*/
 
         val query = palabrasOrdenadas.writeStream
                 .outputMode("complete")

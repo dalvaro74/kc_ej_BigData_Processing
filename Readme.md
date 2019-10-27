@@ -113,6 +113,8 @@ Al esquema de usuarios le he cambiado el tipo de dato a Int porque me parece má
 
 A la hora de tratar los mensajes, se usa una función para desencriptarlos y no se tienen en cuenta las preposiciones, conjunciones ni artículos.
 
+No he sido capaz de recuperar el timestamp, tampoco de obtener el top 10 porque al ser streaming da error. Al hacer la comprobación contra la lista negra, también me da error al hacer un "count" para comprobar si existe alguna palabra en dicha lista negra.
+
 ## Expresiones de Gratitud 🎁
 
 * Comenta a otros sobre este proyecto 📢
