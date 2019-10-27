@@ -1,11 +1,12 @@
 package IOT_Sniffer
 
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
+import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession, functions}
 import org.apache.spark.sql.streaming.Trigger
+import scala.io.{AnsiColor, Source}
+import org.apache.spark.sql.expressions.Window
 
 object Main {
-
     def main(args: Array[String]): Unit = {
         Logger.getLogger("org").setLevel(Level.ERROR)
 
@@ -55,16 +56,24 @@ object Main {
                     atributos(0).toInt
                 ))
 
-        // Obtener las diferentes palabras del mensaje
+        // Cargar lista de palabras excluidas
+        val palabrasExcluidas = spark.sparkContext.broadcast(load("/palabras_excluir.dat"))
+
+        // Obtener las diferentes palabras del mensaje y tratado de palabras
         val conteoPalabras = mensajesDS
                 .select($"pContenidoMensaje")  // Selecciono solo la columna del mensaje
                 .as[String]  // Convierto a array de strings
                 .flatMap(cadena => desencriptaMensaje(cadena).split(" "))  // Desencripto y separo por espacios para encontrar palabras sueltas
                 .filter(_.contains("http") == false)  // Eliminar enlaces
+                .filter(palabra => !palabrasExcluidas.value.contains(palabra.toLowerCase))  // No tenemos en cuenta lista palabras excluidas
                 .groupBy("value")  // Agrupo por la única columna
                 .count()  // Muestro el contador de cada palabra
 
-        val query = conteoPalabras.writeStream
+        // Ordenamos y nos quedamos con las 10 primeras
+        val palabrasOrdenadas = conteoPalabras
+                .orderBy($"count".desc)
+
+        val query = palabrasOrdenadas.writeStream
                 .outputMode("complete")
                 .format("console")
                 .trigger(Trigger.ProcessingTime("10 second"))
@@ -129,5 +138,12 @@ object Main {
     // Desencripta el mensaje (La función es simulada dadas las especificaciones)
     def desencriptaMensaje(pMensaje: String): String = {
         pMensaje
+    }
+
+    def load(resourcePath: String): Set[String] = {
+        val source = Source.fromInputStream(getClass.getResourceAsStream(resourcePath))
+        val words = source.getLines.toSet
+        source.close()
+        words
     }
 }

@@ -39,13 +39,15 @@ También dentro de la carpeta **Resources** se encuentran los csv con la informa
 
 ## Deployment 📦
 
-Al ejecutarse la aplicación (fichero Main.scala), se cargará los csv de Usuarios y dispositivos IoT que estarán guardados en los csv correspondientes en la carpeta **Resources**.
+Al ejecutarse la aplicación (fichero Main.scala), se cargará automáticamente los csv de Usuarios y dispositivos IoT que estarán guardados en los csv correspondientes en la carpeta **Resources**.
 
 Después se iniciará la espera de mensajes desde Kafka, en este paso tendremos que ir a la consola de Kafka y ejecutar el siguiente comando para cargar el csv con los mensajes:
 
 ```bash
 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test < ../../Proyectos_software/KC_Practica_BigData_Processing/src/main/resources/mensajes.csv
 ```
+
+El sistema leerá el fichero de palabras excluídas (artículos, preposiciones,.. ect) y no tendrá en cuenta dichas palabras para el análisis de los resultados.
 
 Cuando acabe la ventana (para las pruebas se ha establecido en 10 segundos) se mostrará el resultado con las 10 palabras más usadas, también se comprobará si la palabra más repetida coincide con alguna de las plabras de la lista negra, en ese caso, se mostrará notificación al usuario de la siguiente forma:
 
